@@ -2,10 +2,13 @@ import { useContextStoreProvider } from "../context/store";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const Contents = () => {
   const { data, isLoading } = useContextStoreProvider();
+  console.log("data: ", data);
+
   return (
     <div>
       {data &&
         data.map((items: any, index) => {
+          console.log("items: ", items);
           return (
             <div key={index} className="w-10/12 lg:w-4/5 mx-auto py-5">
               <span className="text-3xl font-bold">{items?.data?.query}</span>
@@ -23,6 +26,7 @@ const Contents = () => {
                   );
                 })}
               </div>
+              <h1>{items.data.message}</h1>
             </div>
           );
         })}

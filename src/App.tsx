@@ -22,7 +22,7 @@ const FetchData = () => {
         signal: ctrl.signal,
         body: JSON.stringify({
           query: queryVal,
-          history: [{}],
+          history: [],
           model: "gpt-3.5-turbo",
           streamEvent: "begin-stream",
         }),
@@ -34,21 +34,26 @@ const FetchData = () => {
             throw await res.json();
           }
         },
+
         onerror: (err) => {
           if (!!err) {
-            console.log("Fetch onerror", err);
+            // console.log("Fetch onerror", err);
           }
           throw err;
         },
 
         onmessage(event) {
-          // console.log(event.data);
           if (!event.data) {
             return;
           }
+
+          // console.log("event.data: ", event);
+
           const parsedData = JSON.parse(event.data);
-          console.log(parsedData);
+          // console.log("parsedData: ", parsedData);
+
           setData((data: any) => [...data, parsedData]);
+
           setisloading(false);
         },
       });
@@ -63,8 +68,8 @@ const FetchData = () => {
         <MdOutlineSmartToy />
       </p>
       <Inputs getData={getData} />
-      {error && <p>{error}</p>}
-      {<Contents />}
+      {error && <p className=" text-center text-blue-400">{error}</p>}
+      <Contents />
     </div>
   );
 };
