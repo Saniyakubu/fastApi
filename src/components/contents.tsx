@@ -1,5 +1,6 @@
 import { useContextStoreProvider } from "../context/store";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Typewriter from "../context/typewriter";
 const Contents = () => {
   const { data, isLoading } = useContextStoreProvider();
   console.log("data: ", data);
@@ -18,15 +19,18 @@ const Contents = () => {
                     <div key={index} className=" mb-5">
                       <ul className="list-disc">
                         <li className=" hover:text-blue-300 text-blue-200 underline text-xl font-bold my-5">
-                          <a href={res?.url}>{res?.title}</a>
+                          {/* <a href={res?.url}>{res?.title}</a> */}
+                          <a href={res?.url}>
+                            <Typewriter text={res?.title} speed={10} />
+                          </a>
                         </li>
                       </ul>
-                      <p className=" mb-5">{res?.content}</p>
+                      <Typewriter text={res?.content} speed={11} />
                     </div>
                   );
                 })}
               </div>
-              <h1>{items.data.message}</h1>
+              <Typewriter text={items.data.message} speed={14} />
             </div>
           );
         })}
