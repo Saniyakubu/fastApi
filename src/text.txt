@@ -1,0 +1,12 @@
+const getData = await fetch("https://houduanapi.soufalv.com/chat", {
+      method: "POST",
+      headers: {
+        Accept: "text/event-stream",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const resData = await getData.json();
+
+    console.log(resData);
