@@ -24,7 +24,7 @@ const Contents = () => {
         <CardContent>{data && data[0]?.data?.query}</CardContent>
       </Card>
       {chunk && (
-        <Card className="w-2/3 px-6 py-4 break-words">
+        <Card className="w-[95%] mx-auto py-4 break-words md:w-2/3 md:px-6">
           <CardContent
             className={`w-ful  leading-loose space-y-5  text-wrap transition  break-words`}
           >
