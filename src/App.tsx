@@ -87,6 +87,10 @@ const FetchData = () => {
     navigate("/");
   };
 
+  if (!queryVal) {
+    clear();
+  }
+
   return (
     <div>
       <section className="flex items-center justify-between md:px-10">

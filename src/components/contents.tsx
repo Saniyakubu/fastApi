@@ -17,7 +17,7 @@ const Contents = () => {
         <CardContent>{data && data[0]?.data?.query}</CardContent>
       </Card>
 
-      <div className="flex flex-col md:mt-10 mt-5 gap-y-5">
+      <div className="flex flex-col mt-5 md:mt-10 gap-y-5">
         {results?.map((res: any, index: number) => {
           return (
             <Card
@@ -36,20 +36,26 @@ const Contents = () => {
             </Card>
           );
         })}
-        {lastItem && lastItem?.event === "final-response" && (
-          <>
-            {/* <CodeBlock
+        {lastItem && lastItem?.event === "final-response" ? (
+          <Card className="border-none shadow-none">
+            <CardContent>
+              {/* <CodeBlock
               text={lastItem?.data?.message}
               language={"javascript"}
               showLineNumbers={true}
               theme={dracula}
-            /> */}
-            <ReactMarkdown
-              className={"leading-loose"}
-              children={lastItem?.data?.message}
-              remarkPlugins={[remarkGfm]}
-            />
-          </>
+              /> */}
+              <ReactMarkdown
+                className={"leading-loose"}
+                children={lastItem?.data?.message}
+                remarkPlugins={[remarkGfm]}
+              />
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="flex items-center justify-center w-full mt-10 ">
+            <span className="loader"></span>
+          </div>
         )}
       </div>
     </div>
