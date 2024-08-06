@@ -25,7 +25,7 @@ const FrontPage = () => {
         <h1 className="text-4xl font-bold tracking-tight scroll-m-20 ">
           Unleashing Curiosity
         </h1>
-        <div className="flex items-center w-full max-w-2xl px-3 py-2 space-x-2 border focus-within:border-[2px] rounded-2xl">
+        <div className="flex items-center w-[95%] max-w-2xl px-3 py-2 space-x-2 border focus-within:border-[2px] rounded-2xl">
           <Input
             value={queryVal as string}
             className="bg-transparent border-none outline-none "
@@ -42,7 +42,7 @@ const FrontPage = () => {
             <MdOutlineSend />
           </Button>
         </div>
-        <div className="grid w-full max-w-[715px] grid-cols-1 gap-5 px-5 md:grid-cols-2 place-content-center">
+        <div className="grid w-[95%] mx-auto md:max-w-2xl grid-cols-1 gap-5 md:grid-cols-2 place-content-center">
           <Card
             onClick={() => setQueryVal("如何学习react")}
             className="flex items-center w-full gap-5 px-5 py-3 cursor-pointer md:max-w-sm"
