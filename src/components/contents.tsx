@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useContextStoreProvider } from "../context/store";
 // import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Typewriter from "../context/typewriter";
-import ReactMarkdown from "react-markdown";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Button } from "./ui/button";
-import Markdown from "react-markdown";
+import MarkdownRenderer from "./renderer";
 
 // import rehypeKatex from "rehype-katex";
 // import rehypeRaw from "rehype-raw";
@@ -30,9 +29,11 @@ const Contents = () => {
             className={`w-ful  leading-loose space-y-5  text-wrap transition  break-words`}
           >
             {isTrue ? (
-              <ReactMarkdown>{combinedMarkdown}</ReactMarkdown>
+              <MarkdownRenderer content={combinedMarkdown} />
             ) : (
-              <Markdown>{combinedMarkdown.slice(0, 250) + "......."}</Markdown>
+              <MarkdownRenderer
+                content={combinedMarkdown.slice(0, 250) + "......."}
+              />
             )}
           </CardContent>
           <div className="flex justify-center w-full p-2 mt-5">
