@@ -4,18 +4,19 @@ import { useContextStoreProvider } from "../context/store";
 import Typewriter from "../context/typewriter";
 import ReactMarkdown from "react-markdown";
 import { Card, CardContent, CardHeader } from "./ui/card";
-import remarkGfm from "remark-gfm";
 import { Button } from "./ui/button";
 import Markdown from "react-markdown";
-import rehypeKatex from "rehype-katex";
-import rehypeRaw from "rehype-raw";
+
+// import rehypeKatex from "rehype-katex";
+// import rehypeRaw from "rehype-raw";
+// import SyntaxHighlighter from "react-syntax-highlighter";
+
 const Contents = () => {
   const { data, chunk } = useContextStoreProvider();
   const results = data && data[1]?.data?.results;
   // const lastItem = data !== undefined && data[data?.length - 1];
   const combinedMarkdown = chunk && chunk?.map((item) => item?.text).join("");
 
-  console.log("results", combinedMarkdown);
   const [isTrue, setIsTrue] = useState(false);
   return (
     <div className="py-10 md:container">
@@ -31,9 +32,7 @@ const Contents = () => {
             {isTrue ? (
               <ReactMarkdown>{combinedMarkdown}</ReactMarkdown>
             ) : (
-              <ReactMarkdown>
-                {combinedMarkdown.slice(0, 250) + "......."}
-              </ReactMarkdown>
+              <Markdown>{combinedMarkdown.slice(0, 250) + "......."}</Markdown>
             )}
           </CardContent>
           <div className="flex justify-center w-full p-2 mt-5">
@@ -62,22 +61,6 @@ const Contents = () => {
             </Card>
           );
         })}
-        {/* {lastItem && lastItem?.event === "final-response" ? (
-          <Card className="border-none shadow-none">
-            <CardContent>
-              
-              <ReactMarkdown
-                className={"leading-loose"}
-                children={lastItem?.data?.message}
-                remarkPlugins={[remarkGfm]}
-              />
-            </CardContent>
-          </Card>
-        ) : (
-          <div className="flex items-center justify-center w-full mt-10 ">
-            <span className="loader"></span>
-          </div>
-        )} */}
       </div>
     </div>
   );
