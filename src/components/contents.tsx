@@ -1,20 +1,12 @@
 import { useContextStoreProvider } from "../context/store";
 // import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Typewriter from "../context/typewriter";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
-import { CodeBlock, CopyBlock, dracula } from "react-code-blocks";
+import { Card, CardContent, CardHeader } from "./ui/card";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+
 const Contents = () => {
-  const { data, isLoading } = useContextStoreProvider();
+  const { data } = useContextStoreProvider();
   const results = data && data[1]?.data?.results;
   const lastItem = data !== undefined && data[data?.length - 1];
 
