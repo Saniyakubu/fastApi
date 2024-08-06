@@ -22,6 +22,7 @@ const FetchData = () => {
 
   const getData = async () => {
     setData([]);
+    setChuck([]);
     const ctrl = new AbortController();
     setisloading(true);
 
@@ -92,9 +93,9 @@ const FetchData = () => {
     navigate("/");
   };
 
-  if (!queryVal) {
-    clear();
-  }
+  // if (!queryVal) {
+  //   clear();
+  // }
 
   return (
     <div>
