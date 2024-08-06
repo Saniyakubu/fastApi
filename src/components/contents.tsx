@@ -1,44 +1,65 @@
 import { useContextStoreProvider } from "../context/store";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+// import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Typewriter from "../context/typewriter";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { CodeBlock, CopyBlock, dracula } from "react-code-blocks";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 const Contents = () => {
   const { data, isLoading } = useContextStoreProvider();
-  console.log("data: ", data);
+  const results = data && data[1]?.data?.results;
+  const lastItem = data !== undefined && data[data?.length - 1];
 
+  console.log("results", data);
   return (
-    <div>
-      {data &&
-        data.map((items: any, index) => {
-          console.log("items: ", items);
+    <div className="container py-10">
+      <Card className="mb-10 text-3xl font-bold border-none shadow-none">
+        <CardContent>{data && data[0]?.data?.query}</CardContent>
+      </Card>
+
+      <div className="flex flex-col mt-10 gap-y-5">
+        {results?.map((res: any, index: number) => {
           return (
-            <div key={index} className="w-10/12 lg:w-4/5 mx-auto py-5">
-              <span className="text-3xl font-bold">{items?.data?.query}</span>
-              <div className="flex flex-col gap-y-5">
-                {items?.data?.results?.map((res: any, index: number) => {
-                  return (
-                    <div key={index} className=" mb-5">
-                      <ul className="list-disc">
-                        <li className=" hover:text-blue-300 text-blue-200 underline text-xl font-bold my-5">
-                          {/* <a href={res?.url}>{res?.title}</a> */}
-                          <a href={res?.url}>
-                            <Typewriter text={res?.title} speed={10} />
-                          </a>
-                        </li>
-                      </ul>
-                      <Typewriter text={res?.content} speed={11} />
-                    </div>
-                  );
-                })}
-              </div>
-              <Typewriter text={items.data.message} speed={14} />
-            </div>
+            <Card
+              key={index}
+              className="grid max-w-3xl gap-4 p-5 border-none shadow-none"
+            >
+              <CardHeader className="p-0 text-lg font-bold text-blue-400 hover:underline">
+                {/* <a href={res?.url}>{res?.title}</a> */}
+                <a href={res?.url}>
+                  <Typewriter text={res?.title} speed={index + 1} />
+                </a>
+              </CardHeader>
+              <p className="line-clamp-3 text-balance">
+                <Typewriter text={res?.content} speed={index + 2} />
+              </p>
+            </Card>
           );
         })}
-      {isLoading && (
-        <div className="text-7xl mt-20 flex justify-center items-center text-blue-300">
-          <AiOutlineLoading3Quarters />
-        </div>
-      )}
+        {lastItem && lastItem?.event === "final-response" && (
+          <>
+            {/* <CodeBlock
+              text={lastItem?.data?.message}
+              language={"javascript"}
+              showLineNumbers={true}
+              theme={dracula}
+            /> */}
+            <ReactMarkdown
+              className={"leading-loose"}
+              children={lastItem?.data?.message}
+              remarkPlugins={[remarkGfm]}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 };

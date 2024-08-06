@@ -1,4 +1,6 @@
+import { MdOutlineSend } from "react-icons/md";
 import { useContextStoreProvider } from "../context/store";
+import { Button } from "./ui/button";
 
 type inputProps = {
   getData: () => Promise<void>;
@@ -7,22 +9,29 @@ type inputProps = {
 const Inputs = ({ getData }: inputProps) => {
   const { queryVal, setQueryVal } = useContextStoreProvider();
   return (
-    <div className="w-11/12 flex rounded-3xl justify-center items-center lg:w-1/2 mx-auto mt-10 border">
+    <div className="flex items-center justify-center w-full border focus-within:outline rounded-3xl">
       <input
-        placeholder="ask any question..."
-        className="p-3 px-4 text-black bg-neutral-300 rounded-3xl w-full"
+        placeholder="Ask any question..."
+        className="w-full p-3 px-4 text-black bg-transparent outline-none rounded-3xl"
         type="text"
         name="query"
         value={queryVal as string}
         onChange={(e) => setQueryVal(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
+            console.log("queryVal", queryVal);
             getData();
-            setQueryVal("");
             // setData([]);
           }
         }}
       />
+      <Button
+        onClick={getData}
+        type="submit"
+        className="h-12 rounded-r-2xl rounded-br-2xl"
+      >
+        <MdOutlineSend />
+      </Button>
     </div>
   );
 };

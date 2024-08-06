@@ -3,6 +3,8 @@ import React, { createContext, useState, ReactNode, useContext } from "react";
 type contextType = {
   data: any[];
   setData: React.Dispatch<React.SetStateAction<any[]>>;
+  finalMessage: any;
+  setFinalMessage: React.Dispatch<React.SetStateAction<any[]>>;
   queryVal: string | null;
   setQueryVal: React.Dispatch<React.SetStateAction<string>>;
   error: string | null;
@@ -16,6 +18,8 @@ export const stateContext = createContext<contextType>({
   setQueryVal: () => "",
   data: [],
   setData: () => [],
+  finalMessage: [],
+  setFinalMessage: () => [],
   error: "",
   setError: () => "",
   isLoading: false,
@@ -32,6 +36,7 @@ export const useContextStoreProvider = () => {
 
 const StateProvider = ({ children }: Props) => {
   const [data, setData] = useState<any[]>([]);
+  const [finalMessage, setFinalMessage] = useState<any>([]);
   const [queryVal, setQueryVal] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isLoading, setisloading] = useState<boolean>(false);
@@ -45,6 +50,8 @@ const StateProvider = ({ children }: Props) => {
     setError,
     isLoading,
     setisloading,
+    finalMessage,
+    setFinalMessage,
   };
 
   return (
