@@ -11,19 +11,20 @@ const FetchData = () => {
     queryVal,
     setQueryVal,
     setData,
-    data,
     error,
     isLoading,
     setError,
     setisloading,
+    setChuck,
+    chunk,
   } = useContextStoreProvider();
-  console.log(data[data.length - 1]);
+  console.log("chunk", chunk);
 
   const getData = async () => {
     setData([]);
     const ctrl = new AbortController();
     setisloading(true);
-    console.log("queryVal App", queryVal);
+
     try {
       await fetchEventSource("https://houduanapi.soufalv.com/chat", {
         method: "POST",
@@ -66,6 +67,10 @@ const FetchData = () => {
           // console.log("parsedData: ", parsedData);
 
           setData((data: any) => [...data, parsedData]);
+
+          if (parsedData.event === "text-chunk") {
+            setChuck((prevData) => [...prevData, parsedData.data]);
+          }
 
           setisloading(false);
         },

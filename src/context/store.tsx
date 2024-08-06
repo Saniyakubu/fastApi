@@ -3,6 +3,8 @@ import React, { createContext, useState, ReactNode, useContext } from "react";
 type contextType = {
   data: any[];
   setData: React.Dispatch<React.SetStateAction<any[]>>;
+  chunk: any[];
+  setChuck: React.Dispatch<React.SetStateAction<any[]>>;
   finalMessage: any;
   setFinalMessage: React.Dispatch<React.SetStateAction<any[]>>;
   queryVal: string | null;
@@ -18,6 +20,8 @@ export const stateContext = createContext<contextType>({
   setQueryVal: () => "",
   data: [],
   setData: () => [],
+  chunk: [],
+  setChuck: () => [],
   finalMessage: [],
   setFinalMessage: () => [],
   error: "",
@@ -36,6 +40,7 @@ export const useContextStoreProvider = () => {
 
 const StateProvider = ({ children }: Props) => {
   const [data, setData] = useState<any[]>([]);
+  const [chunk, setChuck] = useState<any[]>([]);
   const [finalMessage, setFinalMessage] = useState<any>([]);
   const [queryVal, setQueryVal] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -46,6 +51,8 @@ const StateProvider = ({ children }: Props) => {
     setQueryVal,
     data,
     setData,
+    chunk,
+    setChuck,
     error,
     setError,
     isLoading,
