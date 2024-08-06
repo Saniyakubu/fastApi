@@ -89,8 +89,8 @@ const FetchData = () => {
 
   return (
     <div>
-      <section className="flex items-center justify-between px-10">
-        <div className="flex items-center w-2/3 px-5">
+      <section className="flex items-center justify-between md:px-10">
+        <div className="flex flex-col items-center w-full px-5 md:w-2/3 md:flex-row">
           <img
             className="cursor-pointer w-28"
             onClick={clear}
@@ -100,7 +100,7 @@ const FetchData = () => {
           <Inputs getData={getData} />
         </div>
 
-        <div>
+        <div className="hidden md:block">
           <p className="p-3 transition border rounded-lg cursor-pointer hover:bg-primary hover:text-primary-foreground">
             FeedBack
           </p>

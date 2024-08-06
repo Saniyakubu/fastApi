@@ -12,12 +12,12 @@ const Contents = () => {
 
   console.log("results", data);
   return (
-    <div className="container py-10">
-      <Card className="mb-10 text-3xl font-bold border-none shadow-none">
+    <div className="py-10 md:container">
+      <Card className="text-3xl font-bold border-none shadow-none md:mb-10">
         <CardContent>{data && data[0]?.data?.query}</CardContent>
       </Card>
 
-      <div className="flex flex-col mt-10 gap-y-5">
+      <div className="flex flex-col md:mt-10 mt-5 gap-y-5">
         {results?.map((res: any, index: number) => {
           return (
             <Card
