@@ -15,7 +15,7 @@ const Contents = () => {
   const results = data && data[1]?.data?.results;
   // const lastItem = data !== undefined && data[data?.length - 1];
   const combinedMarkdown = chunk && chunk?.map((item) => item?.text).join("");
-
+  console.log(combinedMarkdown);
   const [isTrue, setIsTrue] = useState(false);
   return (
     <div className="py-10 md:container">
@@ -23,7 +23,7 @@ const Contents = () => {
       <Card className="text-3xl font-bold border-none shadow-none md:mb-10">
         <CardContent>{data && data[0]?.data?.query}</CardContent>
       </Card>
-      {chunk && (
+      {chunk.length > 0 && (
         <Card className="w-[95%] mx-auto md:mx-0 py-4 break-words md:w-2/3 md:px-6">
           <CardContent
             className={`w-ful  leading-loose space-y-5  text-wrap transition  break-words`}

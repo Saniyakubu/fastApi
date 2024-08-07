@@ -3,9 +3,10 @@ import Inputs from "./components/inputs";
 import { useContextStoreProvider } from "./context/store";
 import Contents from "./components/contents";
 import { useEffect } from "react";
-import AiPng from "./assets/inquireAi.png";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "./components/ui/skeleton";
+import { NavigationMenuDemo } from "./components/navbar";
+import Aipng from "./assets/inquireAi2.png";
 const FetchData = () => {
   const {
     queryVal,
@@ -78,14 +79,25 @@ const FetchData = () => {
       });
     } catch (err) {
       setisloading(false);
+      setData([]);
+      setChuck([]);
       setError("Failed to fetch data");
     }
   };
 
   useEffect(() => {
-    getData();
+    if (queryVal) {
+      getData();
+    } else {
+      null;
+      setChuck([]);
+    }
   }, []);
   const navigate = useNavigate();
+
+  if (!queryVal) {
+    setisloading(false);
+  }
 
   const clear = () => {
     setQueryVal("");
@@ -93,29 +105,32 @@ const FetchData = () => {
     navigate("/");
   };
 
-  // if (!queryVal) {
-  //   clear();
-  // }
-
   return (
-    <div>
-      <section className="flex items-center justify-between md:px-10">
-        <div className="flex flex-col items-center w-full px-5 md:w-2/3 md:flex-row">
+    <div className="grid min-h-screen border">
+      <div>
+        <nav className="flex items-center w-full gap-5 px-5 py-5 place-self-start">
           <img
-            className="cursor-pointer w-28"
             onClick={clear}
-            src={AiPng}
-            alt=""
+            className="w-16 cursor-pointer"
+            src={Aipng}
+            alt="ai"
           />
-          <Inputs getData={getData} />
-        </div>
+          <div className="flex-1 ">
+            <NavigationMenuDemo />
+          </div>
+          <div className="hidden md:block">
+            <p className="p-3 transition rounded-lg cursor-pointer hover:bg-primary hover:text-primary-foreground">
+              FeedBack
+            </p>
+          </div>
+        </nav>
+        <section className="flex items-center justify-center p-5 h-fit md:px-10">
+          <div className="flex flex-col items-center justify-center w-full px-5 md:w-2/3 md:flex-row">
+            <Inputs getData={getData} />
+          </div>
+        </section>
+      </div>
 
-        <div className="hidden md:block">
-          <p className="p-3 transition border rounded-lg cursor-pointer hover:bg-primary hover:text-primary-foreground">
-            FeedBack
-          </p>
-        </div>
-      </section>
       {isLoading ? (
         <div className="container flex flex-col gap-10 py-10 space-y-3">
           <Skeleton className="h-8 w-[250px]" />
@@ -157,6 +172,14 @@ const FetchData = () => {
           <Contents />
         </>
       )}
+      <footer className="p-4 place-self-end footer footer-center bg-base-300 text-base-content">
+        <aside>
+          <p>
+            Copyright © {new Date().getFullYear()} - All right reserved by
+            InquireAi Industries Ltd
+          </p>
+        </aside>
+      </footer>
     </div>
   );
 };

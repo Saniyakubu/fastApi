@@ -9,6 +9,8 @@ type contextType = {
   setFinalMessage: React.Dispatch<React.SetStateAction<any[]>>;
   queryVal: string | null;
   setQueryVal: React.Dispatch<React.SetStateAction<string>>;
+  chatQueryVal: string | null;
+  setChatQueryVal: React.Dispatch<React.SetStateAction<string>>;
   error: string | null;
   setError: React.Dispatch<React.SetStateAction<string>>;
   isLoading: boolean;
@@ -18,6 +20,8 @@ type contextType = {
 export const stateContext = createContext<contextType>({
   queryVal: "",
   setQueryVal: () => "",
+  chatQueryVal: "",
+  setChatQueryVal: () => "",
   data: [],
   setData: () => [],
   chunk: [],
@@ -43,12 +47,15 @@ const StateProvider = ({ children }: Props) => {
   const [chunk, setChuck] = useState<any[]>([]);
   const [finalMessage, setFinalMessage] = useState<any>([]);
   const [queryVal, setQueryVal] = useState<string>("");
+  const [chatQueryVal, setChatQueryVal] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isLoading, setisloading] = useState<boolean>(false);
 
   const states: contextType = {
     queryVal,
     setQueryVal,
+    chatQueryVal,
+    setChatQueryVal,
     data,
     setData,
     chunk,
