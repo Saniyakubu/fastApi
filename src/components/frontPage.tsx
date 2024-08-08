@@ -9,16 +9,16 @@ import { useNavigate } from "react-router-dom";
 import { BsCode } from "react-icons/bs";
 import { NavigationMenuDemo } from "./navbar";
 const FrontPage = () => {
-  const { queryVal, setQueryVal, setChatQueryVal } = useContextStoreProvider();
+  const { queryVal, setQueryVal } = useContextStoreProvider();
 
   const navigate = useNavigate();
 
   const sendData = () => {
     navigate("/search");
   };
-  const goToChat = () => {
-    navigate("/chat");
-  };
+  // const goToChat = () => {
+  //   navigate("/chat");
+  // };
   return (
     <section className="grid w-full h-screen overflow-hidden">
       <nav className="flex items-center w-full gap-5 px-5 py-4 place-self-start">
@@ -92,7 +92,7 @@ const FrontPage = () => {
           </Card>
         </div>
 
-        <div className="md:max-w-2xl w-[95%]">
+        {/* <div className="md:max-w-2xl w-[95%]">
           <h4 className="mx-5 my-3 text-xl font-semibold tracking-tight scroll-m-20">
             与 AI 聊天
           </h4>
@@ -122,7 +122,7 @@ const FrontPage = () => {
               <CardContent className="p-0 ">react难不难</CardContent>
             </Card>
           </div>
-        </div>
+        </div> */}
       </article>
       <footer className="p-10 h-fit place-self-end footer bg-neutral text-neutral-content">
         <aside>

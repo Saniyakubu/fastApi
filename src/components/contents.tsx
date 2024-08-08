@@ -5,13 +5,15 @@ import Typewriter from "../context/typewriter";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Button } from "./ui/button";
 import MarkdownRenderer from "./renderer";
+import { useNavigate } from "react-router-dom";
 
 // import rehypeKatex from "rehype-katex";
 // import rehypeRaw from "rehype-raw";
 // import SyntaxHighlighter from "react-syntax-highlighter";
 
 const Contents = () => {
-  const { data, chunk } = useContextStoreProvider();
+  const navigate = useNavigate();
+  const { data, chunk, setChatQueryVal } = useContextStoreProvider();
   const results = data && data[1]?.data?.results;
   // const lastItem = data !== undefined && data[data?.length - 1];
   const combinedMarkdown = chunk && chunk?.map((item) => item?.text).join("");
@@ -20,8 +22,15 @@ const Contents = () => {
   return (
     <div className="py-10 md:container">
       {/* <ReactMarkdown>*React-Markdown* is ** Awesome **</ReactMarkdown> */}
-      <Card className="text-3xl font-bold border-none shadow-none md:mb-10">
-        <CardContent>{data && data[0]?.data?.query}</CardContent>
+      <Card className="text-3xl font-bold text-blue-400 border-none shadow-none cursor-pointer hover:underline md:mb-10">
+        <CardContent
+          onClick={() => {
+            setChatQueryVal(data[0]?.data?.query);
+            navigate("/chat");
+          }}
+        >
+          {data && data[0]?.data?.query}
+        </CardContent>
       </Card>
       {chunk.length > 0 && (
         <Card className="w-[95%] mx-auto md:mx-0 py-4 break-words md:w-2/3 md:px-6">
