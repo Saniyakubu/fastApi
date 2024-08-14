@@ -9,8 +9,8 @@ import { MdOutlineSend } from "react-icons/md";
 import { NavigationMenuDemo } from "./navbar";
 import Aipng from "../assets/inquireAi2.png";
 import { FaRobot } from "react-icons/fa";
-import { Skeleton } from "./ui/skeleton";
 import { useNavigate } from "react-router-dom";
+import { ChatLoading } from "./Loading";
 const Chat = () => {
   const navigate = useNavigate();
   const [chatRes, setChatRes] = useState<any[]>([]);
@@ -96,7 +96,7 @@ const Chat = () => {
     navigate("/");
   };
   return (
-    <div className="grid min-h-screen py-10 md:container">
+    <div className="grid py-10 md:container">
       <div>
         <nav className="flex items-center w-full gap-5 px-5 place-self-start">
           <img
@@ -136,34 +136,8 @@ const Chat = () => {
         </div>
       </div>
       <div className="w-full px-5 py-10 mt-10 space-y-10">
-        {/* <div className="chat chat-start">
-          <div className="chat-image avatar">
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS chat bubble component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <div className="chat-bubble">You were the Chosen One!</div>
-        </div> */}
         {isLoading ? (
-          <>
-            <Card className="w-full border-none shadow-none chat place-content-center chat-end">
-              <Skeleton className="h-8 w-[250px] px-5  py-1" />
-            </Card>
-
-            <Card className="relative w-full border-none shadow-none chat chat-start">
-              <div className="absolute top-0 chat-image avatar">
-                <div className="w-12 p-1 rounded-full">
-                  <Skeleton className="w-[90%] h-[90%] mx-auto" />
-                </div>
-              </div>
-              <CardContent className="w-2/3 mx-10 chat-bubble">
-                <Skeleton className="w-full h-8 p-10" />
-              </CardContent>
-            </Card>
-          </>
+          <ChatLoading />
         ) : (
           <>
             {queryValue && (
@@ -190,14 +164,6 @@ const Chat = () => {
           </>
         )}
       </div>
-      <footer className="p-4 place-self-end footer footer-center bg-base-300 text-base-content">
-        <aside>
-          <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by
-            InquireAi Industries Ltd
-          </p>
-        </aside>
-      </footer>
     </div>
   );
 };

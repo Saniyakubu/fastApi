@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useContextStoreProvider } from "../context/store";
 // import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Typewriter from "../context/typewriter";
@@ -7,21 +7,17 @@ import { Button } from "./ui/button";
 import MarkdownRenderer from "./renderer";
 import { useNavigate } from "react-router-dom";
 
-// import rehypeKatex from "rehype-katex";
-// import rehypeRaw from "rehype-raw";
-// import SyntaxHighlighter from "react-syntax-highlighter";
-
 const Contents = () => {
   const navigate = useNavigate();
   const { data, chunk, setChatQueryVal } = useContextStoreProvider();
   const results = data && data[1]?.data?.results;
-  // const lastItem = data !== undefined && data[data?.length - 1];
-  const combinedMarkdown = chunk && chunk?.map((item) => item?.text).join("");
-  console.log(combinedMarkdown);
+
+  const combinedMarkdown =
+    chunk && useMemo(() => chunk?.map((item) => item?.text).join(""), [chunk]);
+  console.log("combinedMarkdown", combinedMarkdown);
   const [isTrue, setIsTrue] = useState(false);
   return (
     <div className="py-10 md:container">
-      {/* <ReactMarkdown>*React-Markdown* is ** Awesome **</ReactMarkdown> */}
       <Card className="text-3xl font-bold text-blue-400 border-none shadow-none cursor-pointer hover:underline md:mb-10">
         <CardContent
           onClick={() => {

@@ -9,7 +9,7 @@ import { NavigationMenuDemo } from "../navbar";
 
 const RegisterPage = () => {
   return (
-    <div className="grid h-screen">
+    <div className="grid">
       <nav className="flex items-center w-full gap-5 px-5 py-4 place-self-start">
         <img className="w-16" src={AiLogo} alt="ai" />
         <div className="flex-1 ">
